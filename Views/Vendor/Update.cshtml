@@ -1,0 +1,58 @@
+﻿@model CoreDbSpCallMVC.Models.DB.SpVendors
+
+@{
+    ViewData["Title"] = "Update";
+    var name = (string)ViewData["Name"];
+}
+
+
+    <section>
+        <h2>Update a Vendor's name <a asp-action="Index" class="btn btn-sm btn-secondary">&nbsp;&nbsp;&nbsp;&nbsp; Back</a></h2>
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form method="post" class="col-sm-4">
+
+                <div class="form-group">
+                    <label asp-for="VendorId" hidden></label>
+                    <input class="form-control" asp-for="VendorId" readonly hidden />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input class="form-control" asp-for="Name" value="@name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="text-center panel-body">
+                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <section>
+        @if (ViewBag.Result == "Success")
+        {
+            <div class="row">
+                <h5 class="col-sm-12">Updated Vendor's Name</h5>
+                <table class="table table-sm table-striped table-bordered m-2 col-sm-7">
+                    <thead><tr><th>Vendor ID</th><th>Name</th></tr></thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.VendorId</td>
+                            <td>@Model.Name</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    </section>
+
+    <style>
+        .input-validation-error {
+            border-color: red;
+        }
+    </style>

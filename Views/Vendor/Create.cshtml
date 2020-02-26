@@ -1,0 +1,80 @@
+﻿@model CoreDbSpCallMVC.Models.DB.SpVendors
+
+@{
+    ViewData["Title"] = "Create";
+    //var displayNewVendor = (bool)ViewData["display"];
+}
+
+
+    <a asp-action="Index" class="btn btn-sm btn-secondary">Vendor's List</a>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form method="post" role="form" class="form-horizontal">
+
+                <h4>Add New Vendor</h4>
+                <hr />
+
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <div class="col-sm-4">
+                        <input class="form-control" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <button type="submit" class="btn btn-primary">Add Vendor</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<hr />
+
+@*@if (displayNewVendor)*@
+@if (ViewBag.Result == "Success")
+{
+    <div class="row">
+        <div class="col-md-offset-4 col-md-8">
+            <h3>New Vendor </h3>
+        </div>
+    </div>
+
+    <hr />
+
+
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+            <section>
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th style="text-align: left;">Vendor Id</th>
+                            <td style="text-align: center;">@Model.VendorId</td>
+                            <th style="text-align: left;">Name</th>
+                            <td style="text-align: center;">@Model.Name</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+}
+
+
+<style>
+    .input-validation-error {
+        border-color: red;
+    }
+</style>

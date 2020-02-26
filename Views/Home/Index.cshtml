@@ -1,0 +1,137 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Product Page";
+}
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-12">
+        <h2>ASP.NET Core - Entity Framework Call Store Procedure</h2>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <section>
+            <form method="post" role="form" class="form-horizontal">
+                @Html.AntiForgeryToken()
+
+                <h4>Get Product Detail.</h4>
+                <hr />
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ProductID, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.ProductID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ProductID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-4 col-md-10">
+                        <button asp-page-handler="Detail" class="btn btn-default">Get Product Detail</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+<hr />
+
+@if (Model != null &&
+Model.ProductID > 0)
+{
+    <div class="row">
+        <div class="col-md-offset-4 col-md-8">
+            <h3>Product Details </h3>
+        </div>
+    </div>
+
+    <hr />
+
+
+
+    <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+            <section>
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th style="text-align: left;">Product ID</th>
+                            <td style="text-align: center;">@Model.ProductDetail.ProductID</td>
+                            <th style="text-align: left;">Product Number</th>
+                            <td style="text-align: center;">@Model.ProductDetail.ProductNumber</td>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: left;">Product Name</th>
+                            <td style="text-align: center;">@Model.ProductDetail.Name</td>
+                            <th style="text-align: left;">Price</th>
+                            <td style="text-align: center;">@Model.ProductDetail.Price.ToString("#,##0")</td>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: left;">Quantity</th>
+                            <td style="text-align: center;">@Model.ProductDetail.Quantity</td>
+                            <th style="text-align: left;">Color</th>
+                            <td style="text-align: center;">@Model.ProductDetail.Color</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+
+    <hr />
+
+}
+
+<div class="row">
+    <div class="col-md-offset-4 col-md-8">
+        <h3>List of Products </h3>
+    </div>
+</div>
+
+<hr />
+
+@if (Model != null &&
+Model.ProductsGreaterThan1000 != null &&
+Model.ProductsGreaterThan1000.Count > 0)
+{
+    <div class="row">
+        <div class="col-md-offset-1 col-md-8">
+            <section>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Sr.</th>
+                            <th style="text-align: center;">Product ID</th>
+                            <th style="text-align: center;">Product Name</th>
+                            <th style="text-align: center;">Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int i = 0; i < Model.ProductsGreaterThan1000.Count; i++)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@(i + 1)</td>
+                                <td style="text-align: center;">@Model.ProductsGreaterThan1000[i].ProductId</td>
+                                <td style="text-align: center;">@Model.ProductsGreaterThan1000[i].Name</td>
+                                <td style="text-align: center;">@Model.ProductsGreaterThan1000[i].Price.ToString("#,##0") </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+}
+

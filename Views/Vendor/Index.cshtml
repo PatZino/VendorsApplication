@@ -1,0 +1,52 @@
+﻿@model IEnumerable<CoreDbSpCallMVC.Models.DB.SpVendors>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<section>
+    <div>
+        <a asp-action="Create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>&nbsp; &nbsp; Add Vendor</a>
+    </div>
+</section>
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-offset-1 col-md-8">
+        <section>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">VendorId</th>
+                        <th style="text-align: center;">Name</th>
+                        <th style="text-align: center;">Update</th>
+                        <th style="text-align: center;">Delete</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                    <tr>
+                        <td style="text-align: center;">@item.VendorId</td>
+                        <td style="text-align: center;">@item.Name</td>
+                        <td style="text-align: center;">
+                            <a asp-action="Update" asp-route-id="@item.VendorId" asp-route-name="@item.Name" class="btn btn-info">
+                            <i class="fa fa-edit"></i>
+                            </a>
+                        </td>
+                        <td style="text-align: center;">
+                            <a asp-action="Delete" asp-route-id="@item.VendorId" asp-route-name="@item.Name" class="btn btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>                          
+                        </td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
